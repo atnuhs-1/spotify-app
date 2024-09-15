@@ -37,17 +37,17 @@ export default function TopTracks() {
   }, [timeRange]);
 
   return (
-    <div className="min-h-screen flex bg-red">
-      <div className="bg-white p-8  shadow-lg  w-full">
-        <div className="grid grid-cols-3 mb-4">
+   <div className="min-h-screen flex bg-red">
+      <div className="bg-white p-4 md:p-8 shadow-lg w-full">
+        <div className="flex flex-col mb-4 md:grid md:grid-cols-3">
           <div></div>
-          <h1 className="text-2xl font-semibold text-center">Top Tracks</h1>
-          <div className="flex justify-end gap-4">
+          <h1 className="text-2xl font-semibold text-center mb-4 md:mb-0">Top Tracks</h1>
+          <div className="flex flex-wrap justify-center md:justify-end gap-2 md:gap-4">
             <Button
               variant="outline"
               disabled={timeRange === "short_term"}
               onClick={() => handleTimeRange("short_term")}
-              className={`bg-inherit text-black ${
+              className={`bg-inherit text-black text-sm md:text-base ${
                 timeRange === "short_term" ? "bg-slate-950 text-white" : ""
               }`}
             >
@@ -57,7 +57,7 @@ export default function TopTracks() {
               variant="outline"
               disabled={timeRange === "medium_term"}
               onClick={() => handleTimeRange("medium_term")}
-              className={`bg-inherit text-black ${
+              className={`bg-inherit text-black text-sm md:text-base ${
                 timeRange === "medium_term" ? "bg-slate-950 text-white" : ""
               }`}
             >
@@ -67,7 +67,7 @@ export default function TopTracks() {
               variant="outline"
               disabled={timeRange === "long_term"}
               onClick={() => handleTimeRange("long_term")}
-              className={`bg-inherit text-black ${
+              className={`bg-inherit text-black text-sm md:text-base ${
                 timeRange === "long_term" ? "bg-slate-950 text-white" : ""
               }`}
             >
@@ -77,21 +77,21 @@ export default function TopTracks() {
         </div>
 
         {tracks.length > 0 ? (
-          <ol className="grid grid-cols-6 gap-y-20 justify-items-center">
+          <ol className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-y-20 justify-items-center">
             {tracks.map((track, index) => (
-              <li key={index} className="flex flex-col items-center w-[160px]">
+              <li key={index} className="flex flex-col items-center w-full max-w-[160px]">
                 {track.album.images.length > 0 && (
                   <Image
                     width={160}
                     height={160}
                     src={track.album.images[0].url}
                     alt={track.name}
-                    className="rounded-md"
+                    className="rounded-md w-full h-auto"
                   />
                 )}
-                <div className="w-full mt-4">
-                  <p className="text-md font-medium truncate">{track.name}</p>
-                  <p className="text-gray-500">
+                <div className="w-full mt-2 md:mt-4">
+                  <p className="text-sm md:text-md font-medium truncate">{track.name}</p>
+                  <p className="text-xs md:text-sm text-gray-500 truncate">
                     {track.artists.map((artist) => artist.name).join(", ")}
                   </p>
                 </div>
@@ -103,5 +103,6 @@ export default function TopTracks() {
         )}
       </div>
     </div>
+
   );
 }

@@ -14,7 +14,6 @@ const config = {
   callbacks: {
     async jwt({ token, trigger, account, user, profile }) {
       console.log("--jwt--")
-      // debugJwtCallback(token, trigger);
       debugTokenExpiration(token);
       // console.log("token: ", token);
       // console.log("user: ", user);

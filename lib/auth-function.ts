@@ -19,6 +19,7 @@ const AUTH_SPOTIFY_SECRET = process.env.AUTH_SPOTIFY_SECRET!;
 
 export const refreshAccessToken = async (token: JWT) => {
   console.log("Before-refresh:");
+  console.log("refresh_token: ", token.refresh_token);
   debugTokenExpiration(token);
   if (!token.refresh_token) {
     console.error("Missing refresh token");
@@ -69,7 +70,7 @@ export const refreshAccessToken = async (token: JWT) => {
       expires_at: Math.floor(Date.now() / 1000 + newTokens.expires_in),
       refresh_token: newTokens.refresh_token ?? token.refresh_token,
     };
-
+    console.log("refresh_token: ", returnToken.refresh_token);
     debugTokenExpiration(returnToken);
 
     return returnToken;
