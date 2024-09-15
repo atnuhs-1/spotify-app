@@ -3,6 +3,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ProfileMenu({ profileImage }: { profileImage: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,6 +46,7 @@ export default function ProfileMenu({ profileImage }: { profileImage: string }) 
         alt="Profile"
         className="w-10 h-10 rounded-full cursor-pointer"
         onClick={toggleMenu}
+      
       />
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">

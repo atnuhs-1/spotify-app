@@ -1,21 +1,12 @@
-// app/page.tsx
-import { getServerSession } from 'next-auth';
-import { authOptions } from './api/auth/[...nextauth]/route';
-import { redirect } from 'next/navigation';
-import Link from 'next/link';
+import { SessionProvider, useSession } from "next-auth/react";
+import HomeSession from "@/components/HomeSession";
+import HomeServer from "@/components/HomeServer";
 
-export default async function Home() {
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
-    redirect('/api/auth/signin');
-  }
-
+export default function Home() {
   return (
-    <div>
-      <h1>Welcome, {session?.user?.email}</h1>
-      <p>You are signed in with Spotify.</p>
-      <Link href="/api/auth/signout">Sign out</Link>
-    </div>
+    // <SessionProvider>
+    //   <HomeSession />
+    // </SessionProvider>
+    <HomeServer />
   );
 }
