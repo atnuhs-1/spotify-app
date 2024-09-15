@@ -4,6 +4,7 @@ import { Artist, Track } from "@/types/data";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import ErrorPage from "./ErrorPage";
 
 export default async function HomeServer() {
   const session = await auth();
@@ -14,7 +15,7 @@ export default async function HomeServer() {
     tracks = await fetchTopItems("tracks", "5", session?.access_token);
     artists = await fetchTopItems("artists", "5", session?.access_token);
   } else {
-    redirect("/api/auth/signin");
+    return <ErrorPage />
   }
 
   //   console.log(tracks);
