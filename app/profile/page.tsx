@@ -12,7 +12,6 @@ async function getSpotifyProfile(accessToken: string) {
 }
 
 export default async function ProfilePage() {
-  console.log("-----------");
   const session = await auth();
   if (!session) {
     redirect("/api/auth/signin");

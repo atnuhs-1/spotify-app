@@ -24,6 +24,6 @@ declare module "next-auth/jwt" {
       name?: string;
       email?: string;
     }
-    
+    lastRefreshTime?: number;
   }
 }

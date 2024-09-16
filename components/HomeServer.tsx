@@ -10,11 +10,15 @@ export default async function HomeServer() {
   let tracks: Track[];
   let artists: Artist[];
 
+  if (session?.error === "TokenExpired") {
+    return <ErrorPage message="アクセストークンの有効期限が切れました。再度サインインしてください。"/>
+  }
+
   if (session?.access_token) {
     tracks = await fetchTopItems("tracks", "5", session?.access_token);
     artists = await fetchTopItems("artists", "5", session?.access_token);
   } else {
-    return <ErrorPage />
+    return <ErrorPage />;
   }
 
   //   console.log(tracks);
@@ -27,7 +31,9 @@ export default async function HomeServer() {
   return (
     <div className="bg-slate-50 py-4 sm:py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-center font-bold text-xl sm:text-2xl mb-4 sm:mb-5">Home</h1>
+        <h1 className="text-center font-bold text-xl sm:text-2xl mb-4 sm:mb-5">
+          Home
+        </h1>
         <div className="flex flex-col gap-6 sm:gap-8">
           <section>
             <div className="flex justify-between items-center mb-4">
@@ -56,7 +62,9 @@ export default async function HomeServer() {
                       />
                     )}
                     <div className="w-full mt-2">
-                      <p className="text-sm font-medium truncate">{track.name}</p>
+                      <p className="text-sm font-medium truncate">
+                        {track.name}
+                      </p>
                       <p className="text-xs text-gray-500 truncate">
                         {track.artists.map((artist) => artist.name).join(", ")}
                       </p>
@@ -94,7 +102,9 @@ export default async function HomeServer() {
                       />
                     )}
                     <div className="w-full mt-2">
-                      <p className="text-sm font-medium truncate text-center">{artist.name}</p>
+                      <p className="text-sm font-medium truncate text-center">
+                        {artist.name}
+                      </p>
                     </div>
                   </li>
                 ))}
@@ -127,7 +137,10 @@ export default async function HomeServer() {
               </div>
             </Link>
           ) : (
-            <Link href="/api/auth/signin" className="text-center mt-6 sm:mt-10 text-slate-500 hover:text-slate-700">
+            <Link
+              href="/api/auth/signin"
+              className="text-center mt-6 sm:mt-10 text-slate-500 hover:text-slate-700"
+            >
               サインイン
             </Link>
           )}

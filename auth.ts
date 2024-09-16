@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import Spotify from "next-auth/providers/spotify";
 import type { NextAuthConfig } from "next-auth";
-import { debugJwtCallback, debugTokenExpiration, refreshAccessToken } from "@lib/auth-function";
+import { convertToJST, debugJwtCallback, debugTokenExpiration, refreshAccessToken } from "@lib/auth-function";
 
 const config = {
   providers: [
@@ -14,6 +14,7 @@ const config = {
   callbacks: {
     async jwt({ token, trigger, account, user, profile }) {
       console.log("--jwt--")
+      console.log("Time: ", convertToJST(Date.now() / 1000));
       debugTokenExpiration(token);
       // console.log("token: ", token);
       // console.log("user: ", user);
@@ -28,14 +29,15 @@ const config = {
           name: profile.display_name as string,
           email: profile.email as string,
         };
+        token.lastRefreshTime = Math.floor(Date.now() / 1000), // 初回サインイン時に設定
         console.log("after-token: ", token);
         return token;
-      } else if (Date.now() < (token.expires_at as number) * 1000) {
+      } else if (Date.now() < ((token.expires_at as number) * 1000)) { // デバッグ用：２分経過で有効期限切れにする” - (58 * 60 * 1000)”
         console.log("トークン期限切れてない");
-        return token;
+        return {...token, error: null};
       } else {
         console.log("トークン期限切れ");
-        return refreshAccessToken(token);
+        return {...token, error: "TokenExpired"};
       }
     },
     async session({ session, token }) {

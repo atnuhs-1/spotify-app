@@ -41,11 +41,11 @@ export default function Page() {
 
   return (
     <div className="min-h-screen flex bg-red">
-      <div className="bg-white p-8  shadow-lg  w-full">
-        <div className="grid grid-cols-3 mb-4">
+      <div className="bg-white p-4 md:p-8 shadow-lg  w-full">
+        <div className="flex flex-col mb-4 md:grid md:grid-cols-3">
           <div></div>
-          <h1 className="text-2xl font-semibold text-center">Top Artists</h1>
-          <div className="flex justify-end gap-4">
+          <h1 className="text-2xl font-semibold text-center mb-4 md:mb-0">Top Artists</h1>
+          <div className="flex flex-wrap justify-center md:justify-end gap-2 md:gap-4">
             <Button
               variant="outline"
               disabled={timeRange === "short_term"}
@@ -79,9 +79,9 @@ export default function Page() {
           </div>
         </div>
         {artists.length > 0 ? (
-          <ol className="grid grid-cols-6 gap-y-20 justify-items-center">
+          <ol className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-y-20 justify-items-center">
             {artists.map((artist, index) => (
-              <li key={index} className="flex flex-col items-center w-[160px]">
+              <li key={index} className="flex flex-col items-center w-full max-w-[160px]">
                 {artist.images.length > 0 && (
                   <Image
                     width={160}
@@ -91,8 +91,8 @@ export default function Page() {
                     className="rounded-md h-[160px] object-cover"
                   />
                 )}
-                <div className="w-full mt-4">
-                  <p className="text-md font-medium truncate">{artist.name}</p>
+                <div className="w-full mt-2 md:mt-4">
+                  <p className="text-sm md:text-md font-medium truncate">{artist.name}</p>
                   {/* <p className="text-gray-500">{artist.artists.map(artist => artist.name).join(', ')}</p> */}
                 </div>
               </li>

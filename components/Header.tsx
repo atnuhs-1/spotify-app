@@ -42,27 +42,39 @@ export default async function Header() {
                 <SheetTitle>Music Report</SheetTitle>
               </SheetHeader>
               <div className="flex flex-col gap-4 text-center sm:text-left mt-4">
-                <Link href="/" className="hover:bg-gray-300">
-                  Home
-                </Link>
-                <Link href="/top-tracks" className="hover:bg-gray-300">
-                  Top Tracks
-                </Link>
-                <Link href="/top-artists" className="hover:bg-gray-300">
-                  Top Artists
-                </Link>
+                <SheetClose asChild>
+                  <Link href="/" className="hover:bg-gray-300">
+                    Home
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link href="/top-tracks" className="hover:bg-gray-300">
+                    Top Tracks
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link href="/top-artists" className="hover:bg-gray-300">
+                    Top Artists
+                  </Link>
+                </SheetClose>
               </div>
             </SheetContent>
           </Sheet>
-          {/* <Link href="/" className="hover:text-gray-300">
+          <Link href="/" className="hidden lg:inline-block hover:text-gray-300">
             Home
           </Link>
-          <Link href="/top-tracks" className="hover:text-gray-300">
+          <Link
+            href="/top-tracks"
+            className="hidden lg:inline-block hover:text-gray-300"
+          >
             Top Tracks
           </Link>
-          <Link href="/top-artists" className="hover:text-gray-300">
+          <Link
+            href="/top-artists"
+            className="hidden lg:inline-block hover:text-gray-300"
+          >
             Top Artists
-          </Link> */}
+          </Link>
 
           {session?.user ? (
             <DropdownMenu>

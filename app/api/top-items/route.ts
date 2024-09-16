@@ -22,6 +22,8 @@ export async function GET(request: NextRequest) {
 
   if (!session) {
     return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
+  } else if (session.error === "TokenExpired") {
+    return NextResponse.json({message: "アクセストークンの有効期限が切れました。再度サインインしてください。"}, {status: 403});
   }
 
   try {

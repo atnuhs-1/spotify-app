@@ -18,6 +18,13 @@ const AUTH_SPOTIFY_ID = process.env.AUTH_SPOTIFY_ID!;
 const AUTH_SPOTIFY_SECRET = process.env.AUTH_SPOTIFY_SECRET!;
 
 export const refreshAccessToken = async (token: JWT) => {
+  const now = Math.floor(Date.now() / 1000);
+
+  console.log(
+    "lastRefreshTime: ",
+    convertToJST(token.lastRefreshTime as number)
+  );
+
   console.log("Before-refresh:");
   console.log("refresh_token: ", token.refresh_token);
   debugTokenExpiration(token);
@@ -69,8 +76,9 @@ export const refreshAccessToken = async (token: JWT) => {
       access_token: newTokens.access_token,
       expires_at: Math.floor(Date.now() / 1000 + newTokens.expires_in),
       refresh_token: newTokens.refresh_token ?? token.refresh_token,
+      lastRefreshTime: now,
     };
-    console.log("refresh_token: ", returnToken.refresh_token);
+    console.log("returnToken: ", returnToken);
     debugTokenExpiration(returnToken);
 
     return returnToken;
@@ -97,6 +105,11 @@ export const refreshAccessToken = async (token: JWT) => {
     // その他のエラーの場合
     return { ...token, error: "RefreshAccessTokenError" };
   }
+};
+
+export const convertToJST = (timestamp: number) => {
+  const date = new Date(timestamp * 1000); // Convert to milliseconds
+  return date.toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" });
 };
 
 export const debugTokenExpiration = (token: JWT) => {
