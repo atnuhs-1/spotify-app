@@ -48,7 +48,7 @@ export default function TopTracks() {
               disabled={timeRange === "short_term"}
               onClick={() => handleTimeRange("short_term")}
               className={`bg-inherit text-black text-sm md:text-base ${
-                timeRange === "short_term" ? "bg-slate-950 text-white" : ""
+                timeRange === "short_term" ? "bg-slate-950 text-white disabled:opacity-100" : ""
               }`}
             >
               Month
@@ -58,7 +58,7 @@ export default function TopTracks() {
               disabled={timeRange === "medium_term"}
               onClick={() => handleTimeRange("medium_term")}
               className={`bg-inherit text-black text-sm md:text-base ${
-                timeRange === "medium_term" ? "bg-slate-950 text-white" : ""
+                timeRange === "medium_term" ? "bg-slate-950 text-white disabled:opacity-100" : ""
               }`}
             >
               Half Year
@@ -68,7 +68,7 @@ export default function TopTracks() {
               disabled={timeRange === "long_term"}
               onClick={() => handleTimeRange("long_term")}
               className={`bg-inherit text-black text-sm md:text-base ${
-                timeRange === "long_term" ? "bg-slate-950 text-white" : ""
+                timeRange === "long_term" ? "bg-slate-950 text-white disabled:opacity-100" : ""
               }`}
             >
               Year

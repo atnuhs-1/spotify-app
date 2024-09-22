@@ -16,8 +16,8 @@ const config = {
       console.log("--jwt--")
       console.log("Time: ", convertToJST(Date.now() / 1000));
       debugTokenExpiration(token);
-      // console.log("token: ", token);
-      // console.log("user: ", user);
+
+      // サインイン時
       if (account && profile) {
         console.log("Initial sign in");
         console.log("before-token: ", token);

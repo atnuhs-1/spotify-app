@@ -11,7 +11,9 @@ export default async function HomeServer() {
   let artists: Artist[];
 
   if (session?.error === "TokenExpired") {
-    return <ErrorPage message="アクセストークンの有効期限が切れました。再度サインインしてください。"/>
+    return (
+      <ErrorPage message="アクセストークンの有効期限が切れました。再度サインインしてください。" />
+    );
   }
 
   if (session?.access_token) {
