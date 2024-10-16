@@ -5,6 +5,7 @@ Spotify APIの制限で開発者が手動でメールアドレスを設定しな
 https://spotify-app-rouge.vercel.app/
 
 アプリ画面
+
 <img width="500" alt="home" src="./docs/images/home.png">
 <img width="500" alt="top-tracks" src="./docs/images/top-tracks.png">
 <img width="500" alt="top-artists" src="./docs/images/top-artists.png">
